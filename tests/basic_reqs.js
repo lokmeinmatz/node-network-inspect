@@ -6,10 +6,11 @@ const session = netInspect.start({
     log: console.log,
     warn: console.warn,
     error: console.error,
-  }
+  },
+  //emitModes: [netInspect.EmitMode.LogFull]
+  emitModes: [netInspect.EmitMode.LogSummary]
 });
 
-console.log('netInspect', netInspect);
 
 async function main() {
   // make http request to google.com
@@ -47,6 +48,7 @@ async function main() {
   console.log('fetch request to google.com');
   const res = await fetch('https://google.com');
   console.log('res:', res.status, res.statusText);
+  const text = await res.text();
 
   session.stop();
 }
